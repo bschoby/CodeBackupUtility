@@ -36,9 +36,9 @@ namespace CodeBackupUtility
         #region Setup
         private void setDefaultValues()
         {
-            txtDateTime.Text = _dateTimeCutOff.ToString("MM/dd/yyyy h:mm tt");
+            dtpQualDate.Value = DateTime.Now;
+            dtpQualTime.Value = DateTime.Now.AddHours(-2);
             txtDestinationFolder.Text = defaultFolderDialogPath(_folderDestination);
-            lblDateFeedback.Text = "";
             lblFeedback.Text = "";
             lblFeedbackSelected.Text = "";
             lblFeedbackProcessed.Text = "";
@@ -56,7 +56,8 @@ namespace CodeBackupUtility
             System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
             ToolTip1.SetToolTip(txtBackupLabel, "Used to name a parent folder for the backup, example 'MyProject'; the current date/time will be appended, example '" + sampleBackupLabel + "'.");
             ToolTip1.SetToolTip(lblBackup, "Used to name a parent folder for the backup, example 'MyProject'; the current date/time will be appended, example '" + sampleBackupLabel + "'.");
-            ToolTip1.SetToolTip(txtDateTime, "Qualification Date - only files modified after this date will be returned.");
+            ToolTip1.SetToolTip(dtpQualDate, "Qualification Date - only files modified after this date will be returned.");
+            ToolTip1.SetToolTip(dtpQualTime, "Qualification Date - only files modified after this date will be returned.");
             ToolTip1.SetToolTip(lblDateTime, "Qualification Date - only files modified after this date will be returned.");
             ToolTip1.SetToolTip(txtSourceFolder, "The folder where the files to backup exist.");
             ToolTip1.SetToolTip(lblSourceFolder, "The folder where the files to backup exist.");
@@ -141,17 +142,14 @@ namespace CodeBackupUtility
         #endregion buttonEvents
 
         #region otherEvents
-        private void txtDateTime_Leave(object sender, EventArgs e)
+        private void dtpQualTime_ValueChanged(object sender, EventArgs e)
         {
-            if (!DateTime.TryParse(txtDateTime.Text, out _dateTimeCutOff))
-            {
-                lblDateFeedback.Text = "INVALID DATE";
-                txtDateTime.Focus();
-            }
-            else
-            {
-                lblDateFeedback.Text = "";
-            }
+            setDateTimeCutOff();
+        }
+
+        private void dtpQualDate_ValueChanged(object sender, EventArgs e)
+        {
+            setDateTimeCutOff();
         }
 
         private void txtBackupLabel_Leave(object sender, EventArgs e)
@@ -187,6 +185,11 @@ namespace CodeBackupUtility
         #endregion otherEvents
 
         #region simpleFunctions
+        private void setDateTimeCutOff()
+        {
+            _dateTimeCutOff = new DateTime(dtpQualDate.Value.Year, dtpQualDate.Value.Month, dtpQualDate.Value.Day, dtpQualTime.Value.Hour, dtpQualTime.Value.Minute, dtpQualDate.Value.Second);
+        }
+
         private string ensurePathEndsWithSlash(string path)
         {
             if (!path.EndsWith(@"\"))
@@ -293,6 +296,10 @@ namespace CodeBackupUtility
             MessageBox.Show("Backup complete");
         }
         #endregion PrimaryMethods
+
+        
+
+        
 
     }
 }

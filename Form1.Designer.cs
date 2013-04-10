@@ -33,14 +33,12 @@
             this.lblDestinationFolder = new System.Windows.Forms.Label();
             this.txtDestinationFolder = new System.Windows.Forms.TextBox();
             this.lblDateTime = new System.Windows.Forms.Label();
-            this.txtDateTime = new System.Windows.Forms.TextBox();
             this.txtDisplay = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btnSetSourceFolder = new System.Windows.Forms.Button();
             this.btnSetDestinationFolder = new System.Windows.Forms.Button();
             this.btnScan = new System.Windows.Forms.Button();
             this.lblFeedback = new System.Windows.Forms.Label();
-            this.lblDateFeedback = new System.Windows.Forms.Label();
             this.lblFeedbackProcessed = new System.Windows.Forms.Label();
             this.lblFeedbackSelected = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
@@ -53,6 +51,8 @@
             this.chkIgnoreGit = new System.Windows.Forms.CheckBox();
             this.chkIgnoreBin = new System.Windows.Forms.CheckBox();
             this.chkIgnoreObj = new System.Windows.Forms.CheckBox();
+            this.dtpQualTime = new System.Windows.Forms.DateTimePicker();
+            this.dtpQualDate = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // txtSourceFolder
@@ -96,14 +96,6 @@
             this.lblDateTime.TabIndex = 5;
             this.lblDateTime.Text = "Qual Date/Time";
             // 
-            // txtDateTime
-            // 
-            this.txtDateTime.Location = new System.Drawing.Point(114, 64);
-            this.txtDateTime.Name = "txtDateTime";
-            this.txtDateTime.Size = new System.Drawing.Size(167, 20);
-            this.txtDateTime.TabIndex = 5;
-            this.txtDateTime.Leave += new System.EventHandler(this.txtDateTime_Leave);
-            // 
             // txtDisplay
             // 
             this.txtDisplay.Location = new System.Drawing.Point(12, 138);
@@ -138,7 +130,7 @@
             this.btnScan.Location = new System.Drawing.Point(595, 12);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(96, 33);
-            this.btnScan.TabIndex = 7;
+            this.btnScan.TabIndex = 8;
             this.btnScan.Text = "Scan";
             this.btnScan.UseVisualStyleBackColor = true;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
@@ -151,15 +143,6 @@
             this.lblFeedback.Size = new System.Drawing.Size(65, 13);
             this.lblFeedback.TabIndex = 10;
             this.lblFeedback.Text = "lblFeedback";
-            // 
-            // lblDateFeedback
-            // 
-            this.lblDateFeedback.AutoSize = true;
-            this.lblDateFeedback.Location = new System.Drawing.Point(287, 67);
-            this.lblDateFeedback.Name = "lblDateFeedback";
-            this.lblDateFeedback.Size = new System.Drawing.Size(88, 13);
-            this.lblDateFeedback.TabIndex = 11;
-            this.lblDateFeedback.Text = "lblDateFeedback";
             // 
             // lblFeedbackProcessed
             // 
@@ -194,7 +177,7 @@
             this.btnBackup.Location = new System.Drawing.Point(698, 12);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(96, 33);
-            this.btnBackup.TabIndex = 15;
+            this.btnBackup.TabIndex = 9;
             this.btnBackup.Text = "Backup";
             this.btnBackup.UseVisualStyleBackColor = true;
             this.btnBackup.Click += new System.EventHandler(this.btnBackup_Click);
@@ -213,7 +196,7 @@
             this.txtBackupLabel.Location = new System.Drawing.Point(114, 90);
             this.txtBackupLabel.Name = "txtBackupLabel";
             this.txtBackupLabel.Size = new System.Drawing.Size(167, 20);
-            this.txtBackupLabel.TabIndex = 6;
+            this.txtBackupLabel.TabIndex = 7;
             this.txtBackupLabel.Click += new System.EventHandler(this.txtBackupLabel_Click);
             this.txtBackupLabel.Leave += new System.EventHandler(this.txtBackupLabel_Leave);
             this.txtBackupLabel.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBackupLabel_KeyUp);
@@ -242,7 +225,7 @@
             this.chkAutoBackup.Location = new System.Drawing.Point(595, 47);
             this.chkAutoBackup.Name = "chkAutoBackup";
             this.chkAutoBackup.Size = new System.Drawing.Size(84, 17);
-            this.chkAutoBackup.TabIndex = 24;
+            this.chkAutoBackup.TabIndex = 10;
             this.chkAutoBackup.Text = "Feelin\' lucky";
             this.chkAutoBackup.UseVisualStyleBackColor = true;
             this.chkAutoBackup.CheckedChanged += new System.EventHandler(this.chkAutoBackup_CheckedChanged);
@@ -253,7 +236,7 @@
             this.chkIgnoreGit.Location = new System.Drawing.Point(607, 140);
             this.chkIgnoreGit.Name = "chkIgnoreGit";
             this.chkIgnoreGit.Size = new System.Drawing.Size(99, 17);
-            this.chkIgnoreGit.TabIndex = 27;
+            this.chkIgnoreGit.TabIndex = 11;
             this.chkIgnoreGit.Text = "Ignore git folder";
             this.chkIgnoreGit.UseVisualStyleBackColor = true;
             // 
@@ -263,7 +246,7 @@
             this.chkIgnoreBin.Location = new System.Drawing.Point(607, 163);
             this.chkIgnoreBin.Name = "chkIgnoreBin";
             this.chkIgnoreBin.Size = new System.Drawing.Size(102, 17);
-            this.chkIgnoreBin.TabIndex = 28;
+            this.chkIgnoreBin.TabIndex = 12;
             this.chkIgnoreBin.Text = "Ignore bin folder";
             this.chkIgnoreBin.UseVisualStyleBackColor = true;
             // 
@@ -273,15 +256,37 @@
             this.chkIgnoreObj.Location = new System.Drawing.Point(607, 186);
             this.chkIgnoreObj.Name = "chkIgnoreObj";
             this.chkIgnoreObj.Size = new System.Drawing.Size(102, 17);
-            this.chkIgnoreObj.TabIndex = 29;
+            this.chkIgnoreObj.TabIndex = 13;
             this.chkIgnoreObj.Text = "Ignore obj folder";
             this.chkIgnoreObj.UseVisualStyleBackColor = true;
+            // 
+            // dtpQualTime
+            // 
+            this.dtpQualTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpQualTime.Location = new System.Drawing.Point(225, 64);
+            this.dtpQualTime.Name = "dtpQualTime";
+            this.dtpQualTime.ShowUpDown = true;
+            this.dtpQualTime.Size = new System.Drawing.Size(95, 20);
+            this.dtpQualTime.TabIndex = 6;
+            this.dtpQualTime.ValueChanged += new System.EventHandler(this.dtpQualTime_ValueChanged);
+            // 
+            // dtpQualDate
+            // 
+            this.dtpQualDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpQualDate.Location = new System.Drawing.Point(114, 64);
+            this.dtpQualDate.Name = "dtpQualDate";
+            this.dtpQualDate.Size = new System.Drawing.Size(105, 20);
+            this.dtpQualDate.TabIndex = 5;
+            this.dtpQualDate.Value = new System.DateTime(2013, 4, 9, 9, 52, 0, 0);
+            this.dtpQualDate.ValueChanged += new System.EventHandler(this.dtpQualDate_ValueChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 514);
+            this.Controls.Add(this.dtpQualDate);
+            this.Controls.Add(this.dtpQualTime);
             this.Controls.Add(this.chkIgnoreObj);
             this.Controls.Add(this.chkIgnoreBin);
             this.Controls.Add(this.chkIgnoreGit);
@@ -294,14 +299,12 @@
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.lblFeedbackSelected);
             this.Controls.Add(this.lblFeedbackProcessed);
-            this.Controls.Add(this.lblDateFeedback);
             this.Controls.Add(this.lblFeedback);
             this.Controls.Add(this.btnScan);
             this.Controls.Add(this.btnSetDestinationFolder);
             this.Controls.Add(this.btnSetSourceFolder);
             this.Controls.Add(this.txtDisplay);
             this.Controls.Add(this.lblDateTime);
-            this.Controls.Add(this.txtDateTime);
             this.Controls.Add(this.lblDestinationFolder);
             this.Controls.Add(this.txtDestinationFolder);
             this.Controls.Add(this.lblSourceFolder);
@@ -321,14 +324,12 @@
         private System.Windows.Forms.Label lblDestinationFolder;
         private System.Windows.Forms.TextBox txtDestinationFolder;
         private System.Windows.Forms.Label lblDateTime;
-        private System.Windows.Forms.TextBox txtDateTime;
         private System.Windows.Forms.TextBox txtDisplay;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button btnSetSourceFolder;
         private System.Windows.Forms.Button btnSetDestinationFolder;
         private System.Windows.Forms.Button btnScan;
         private System.Windows.Forms.Label lblFeedback;
-        private System.Windows.Forms.Label lblDateFeedback;
         private System.Windows.Forms.Label lblFeedbackProcessed;
         private System.Windows.Forms.Label lblFeedbackSelected;
         private System.Windows.Forms.Button btnStop;
@@ -341,6 +342,8 @@
         private System.Windows.Forms.CheckBox chkIgnoreGit;
         private System.Windows.Forms.CheckBox chkIgnoreBin;
         private System.Windows.Forms.CheckBox chkIgnoreObj;
+        private System.Windows.Forms.DateTimePicker dtpQualTime;
+        private System.Windows.Forms.DateTimePicker dtpQualDate;
     }
 }
 
