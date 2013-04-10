@@ -50,6 +50,9 @@
             this.lblBackupLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.chkAutoBackup = new System.Windows.Forms.CheckBox();
+            this.chkIgnoreGit = new System.Windows.Forms.CheckBox();
+            this.chkIgnoreBin = new System.Windows.Forms.CheckBox();
+            this.chkIgnoreObj = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // txtSourceFolder
@@ -107,7 +110,7 @@
             this.txtDisplay.Multiline = true;
             this.txtDisplay.Name = "txtDisplay";
             this.txtDisplay.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDisplay.Size = new System.Drawing.Size(804, 364);
+            this.txtDisplay.Size = new System.Drawing.Size(578, 364);
             this.txtDisplay.TabIndex = 25;
             // 
             // btnSetSourceFolder
@@ -244,11 +247,44 @@
             this.chkAutoBackup.UseVisualStyleBackColor = true;
             this.chkAutoBackup.CheckedChanged += new System.EventHandler(this.chkAutoBackup_CheckedChanged);
             // 
+            // chkIgnoreGit
+            // 
+            this.chkIgnoreGit.AutoSize = true;
+            this.chkIgnoreGit.Location = new System.Drawing.Point(607, 140);
+            this.chkIgnoreGit.Name = "chkIgnoreGit";
+            this.chkIgnoreGit.Size = new System.Drawing.Size(99, 17);
+            this.chkIgnoreGit.TabIndex = 27;
+            this.chkIgnoreGit.Text = "Ignore git folder";
+            this.chkIgnoreGit.UseVisualStyleBackColor = true;
+            // 
+            // chkIgnoreBin
+            // 
+            this.chkIgnoreBin.AutoSize = true;
+            this.chkIgnoreBin.Location = new System.Drawing.Point(607, 163);
+            this.chkIgnoreBin.Name = "chkIgnoreBin";
+            this.chkIgnoreBin.Size = new System.Drawing.Size(102, 17);
+            this.chkIgnoreBin.TabIndex = 28;
+            this.chkIgnoreBin.Text = "Ignore bin folder";
+            this.chkIgnoreBin.UseVisualStyleBackColor = true;
+            // 
+            // chkIgnoreObj
+            // 
+            this.chkIgnoreObj.AutoSize = true;
+            this.chkIgnoreObj.Location = new System.Drawing.Point(607, 186);
+            this.chkIgnoreObj.Name = "chkIgnoreObj";
+            this.chkIgnoreObj.Size = new System.Drawing.Size(102, 17);
+            this.chkIgnoreObj.TabIndex = 29;
+            this.chkIgnoreObj.Text = "Ignore obj folder";
+            this.chkIgnoreObj.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 514);
+            this.Controls.Add(this.chkIgnoreObj);
+            this.Controls.Add(this.chkIgnoreBin);
+            this.Controls.Add(this.chkIgnoreGit);
             this.Controls.Add(this.chkAutoBackup);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblBackupLabel);
@@ -302,6 +338,9 @@
         private System.Windows.Forms.Label lblBackupLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkAutoBackup;
+        private System.Windows.Forms.CheckBox chkIgnoreGit;
+        private System.Windows.Forms.CheckBox chkIgnoreBin;
+        private System.Windows.Forms.CheckBox chkIgnoreObj;
     }
 }
 

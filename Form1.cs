@@ -45,6 +45,9 @@ namespace CodeBackupUtility
             btnStop.Visible = false;
             lblBackupLabel.Text = "";
             txtBackupLabel.Text = _backupLabelPlaceholder;
+            chkIgnoreObj.Checked = true;
+            chkIgnoreBin.Checked = true;
+            chkIgnoreGit.Checked = true;
         }
 
         private void prepareToolTips()
@@ -220,6 +223,7 @@ namespace CodeBackupUtility
         {
             int filesChecked = 0;
             int filesSelected = 0;
+            bool skipThisFile = false;
 
             string[] files = Directory.GetFiles(_folderSource, "*.*", SearchOption.AllDirectories);
             lblFeedback.Text = files.Length.ToString() + " file(s) found";
@@ -234,10 +238,16 @@ namespace CodeBackupUtility
                 }
                 else
                 {
+                    skipThisFile = false;
                     filesChecked += 1;
                     DateTime fileDate = File.GetLastWriteTime(filename);
 
-                    if (fileDate > _dateTimeCutOff)
+                    if (chkIgnoreGit.Checked && filename.Contains(@"\.git\")) { skipThisFile = true; }
+                    if (chkIgnoreBin.Checked && filename.Contains(@"\bin\")) { skipThisFile = true; }
+                    if (chkIgnoreObj.Checked && filename.Contains(@"\obj\")) { skipThisFile = true; }
+                    if (fileDate < _dateTimeCutOff) { skipThisFile = true; }
+
+                    if (skipThisFile == false)
                     {
                         filesSelected += 1;
                         txtDisplay.Text += filename + Environment.NewLine;
