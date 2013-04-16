@@ -31,6 +31,12 @@ namespace CodeBackupUtility
             //for test only
             _folderSource = @"C:\insight2\Insight2.Web\Controllers\";
             txtSourceFolder.Text = _folderSource;
+
+            txtDestinationFolder.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtDestinationFolder.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
+
+            txtSourceFolder.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtSourceFolder.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
         }
 
         #region Setup
