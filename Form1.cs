@@ -28,15 +28,19 @@ namespace CodeBackupUtility
             setDefaultValues();
             prepareToolTips();
 
+            //TODO
+            //Add option to ignore with a textbox and comma separated list of chars, example [.exe, \debug\, ...]
+
             //for test only
-            _folderSource = @"C:\insight2\Insight2.Web\Controllers\";
+            //_folderSource = @"C:\insight2\Insight2.Web\Controllers\";
+            _folderSource = @"C:\";
             txtSourceFolder.Text = _folderSource;
 
             txtDestinationFolder.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtDestinationFolder.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
+            txtDestinationFolder.AutoCompleteSource = AutoCompleteSource.AllSystemSources;
 
             txtSourceFolder.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtSourceFolder.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
+            txtSourceFolder.AutoCompleteSource = AutoCompleteSource.AllSystemSources;
         }
 
         #region Setup
@@ -144,6 +148,11 @@ namespace CodeBackupUtility
             {
                 MessageBox.Show("Nothing to backup");
             }
+        }
+
+        private void btnClearResults_Click(object sender, EventArgs e)
+        {
+            txtDisplay.Text = "";
         }
         #endregion buttonEvents
 
@@ -303,9 +312,6 @@ namespace CodeBackupUtility
         }
         #endregion PrimaryMethods
 
-        
-
-        
 
     }
 }

@@ -53,6 +53,7 @@
             this.chkIgnoreObj = new System.Windows.Forms.CheckBox();
             this.dtpQualTime = new System.Windows.Forms.DateTimePicker();
             this.dtpQualDate = new System.Windows.Forms.DateTimePicker();
+            this.btnClearResults = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtSourceFolder
@@ -280,11 +281,22 @@
             this.dtpQualDate.Value = new System.DateTime(2013, 4, 9, 9, 52, 0, 0);
             this.dtpQualDate.ValueChanged += new System.EventHandler(this.dtpQualDate_ValueChanged);
             // 
+            // btnClearResults
+            // 
+            this.btnClearResults.Location = new System.Drawing.Point(603, 209);
+            this.btnClearResults.Name = "btnClearResults";
+            this.btnClearResults.Size = new System.Drawing.Size(96, 33);
+            this.btnClearResults.TabIndex = 27;
+            this.btnClearResults.Text = "Clear Text";
+            this.btnClearResults.UseVisualStyleBackColor = true;
+            this.btnClearResults.Click += new System.EventHandler(this.btnClearResults_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 514);
+            this.Controls.Add(this.btnClearResults);
             this.Controls.Add(this.dtpQualDate);
             this.Controls.Add(this.dtpQualTime);
             this.Controls.Add(this.chkIgnoreObj);
@@ -344,6 +356,7 @@
         private System.Windows.Forms.CheckBox chkIgnoreObj;
         private System.Windows.Forms.DateTimePicker dtpQualTime;
         private System.Windows.Forms.DateTimePicker dtpQualDate;
+        private System.Windows.Forms.Button btnClearResults;
     }
 }
 
