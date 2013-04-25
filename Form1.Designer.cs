@@ -54,6 +54,8 @@
             this.dtpQualTime = new System.Windows.Forms.DateTimePicker();
             this.dtpQualDate = new System.Windows.Forms.DateTimePicker();
             this.btnClearResults = new System.Windows.Forms.Button();
+            this.chkIgnoreOther = new System.Windows.Forms.CheckBox();
+            this.txtFsIgnore = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtSourceFolder
@@ -283,7 +285,7 @@
             // 
             // btnClearResults
             // 
-            this.btnClearResults.Location = new System.Drawing.Point(603, 209);
+            this.btnClearResults.Location = new System.Drawing.Point(479, 102);
             this.btnClearResults.Name = "btnClearResults";
             this.btnClearResults.Size = new System.Drawing.Size(96, 33);
             this.btnClearResults.TabIndex = 27;
@@ -291,11 +293,31 @@
             this.btnClearResults.UseVisualStyleBackColor = true;
             this.btnClearResults.Click += new System.EventHandler(this.btnClearResults_Click);
             // 
+            // chkIgnoreOther
+            // 
+            this.chkIgnoreOther.AutoSize = true;
+            this.chkIgnoreOther.Location = new System.Drawing.Point(607, 209);
+            this.chkIgnoreOther.Name = "chkIgnoreOther";
+            this.chkIgnoreOther.Size = new System.Drawing.Size(98, 17);
+            this.chkIgnoreOther.TabIndex = 28;
+            this.chkIgnoreOther.Text = "Ignore CSV list:";
+            this.chkIgnoreOther.UseVisualStyleBackColor = true;
+            // 
+            // txtFsIgnore
+            // 
+            this.txtFsIgnore.Location = new System.Drawing.Point(607, 232);
+            this.txtFsIgnore.Multiline = true;
+            this.txtFsIgnore.Name = "txtFsIgnore";
+            this.txtFsIgnore.Size = new System.Drawing.Size(200, 58);
+            this.txtFsIgnore.TabIndex = 29;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 514);
+            this.Controls.Add(this.txtFsIgnore);
+            this.Controls.Add(this.chkIgnoreOther);
             this.Controls.Add(this.btnClearResults);
             this.Controls.Add(this.dtpQualDate);
             this.Controls.Add(this.dtpQualTime);
@@ -357,6 +379,8 @@
         private System.Windows.Forms.DateTimePicker dtpQualTime;
         private System.Windows.Forms.DateTimePicker dtpQualDate;
         private System.Windows.Forms.Button btnClearResults;
+        private System.Windows.Forms.CheckBox chkIgnoreOther;
+        private System.Windows.Forms.TextBox txtFsIgnore;
     }
 }
 

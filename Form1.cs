@@ -33,7 +33,7 @@ namespace CodeBackupUtility
 
             //for test only
             //_folderSource = @"C:\insight2\Insight2.Web\Controllers\";
-            _folderSource = @"C:\";
+            _folderSource = "";
             txtSourceFolder.Text = _folderSource;
 
             txtDestinationFolder.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -79,6 +79,8 @@ namespace CodeBackupUtility
             ToolTip1.SetToolTip(btnSetDestinationFolder, "Select the destination folder.");
             ToolTip1.SetToolTip(btnBackup, "Create a backup copy of the files listed in the results.");
             ToolTip1.SetToolTip(chkAutoBackup, "Automatically perform the backup after the scan is complete.");
+            ToolTip1.SetToolTip(chkIgnoreOther, "Ignore filenames with any of the comma separated values in the box below.");
+            ToolTip1.SetToolTip(txtFsIgnore, "not case sensitive, spaces are not trimmed, so 'a,b' is not the same as 'a, b'.");
         }
         #endregion Setup
 
@@ -112,22 +114,25 @@ namespace CodeBackupUtility
 
         private void btnScan_Click(object sender, EventArgs e)
         {
-            btnScan.Enabled = false;
-            btnBackup.Enabled = false;
-            txtDisplay.Text = "";
-            _folderDestination = ensurePathEndsWithSlash(_folderDestination);
-            if (_folderSource != txtSourceFolder.Text) _folderSource = ensurePathEndsWithSlash(txtSourceFolder.Text);
-            btnStop.Visible = true;
-            ListDesiredFiles();
-            if (chkAutoBackup.Checked)
+            if (readyToScan())
             {
+                btnScan.Enabled = false;
                 btnBackup.Enabled = false;
-                PerformBackup();
+                txtDisplay.Text = "";
+                _folderDestination = ensurePathEndsWithSlash(_folderDestination);
+                if (_folderSource != txtSourceFolder.Text) _folderSource = ensurePathEndsWithSlash(txtSourceFolder.Text);
+                btnStop.Visible = true;
+                ListDesiredFiles();
+                if (chkAutoBackup.Checked)
+                {
+                    btnBackup.Enabled = false;
+                    PerformBackup();
+                    btnBackup.Enabled = true;
+                }
+                btnScan.Enabled = true;
                 btnBackup.Enabled = true;
+                btnStop.Visible = false;
             }
-            btnScan.Enabled = true;
-            btnBackup.Enabled = true;
-            btnStop.Visible = false;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -217,7 +222,7 @@ namespace CodeBackupUtility
         private string createBackupLabel(string value)
         {
             DateTime dt = DateTime.Now;
-            if (value == string.Empty || value == "{project name or keyword}")
+            if (value == string.Empty || value == _backupLabelPlaceholder)
             {
                 value = "Backup";
             }
@@ -237,6 +242,28 @@ namespace CodeBackupUtility
         #endregion simpleFunctions
 
         #region PrimaryMethods
+
+        private bool readyToScan()
+        {
+            bool result = true;
+
+            if (!Directory.Exists(txtSourceFolder.Text))
+            {
+                result = false;
+                txtDisplay.Text = "source folder is not valid." + Environment.NewLine;
+                txtSourceFolder.Focus();
+            }
+
+            if (!Directory.Exists(txtDestinationFolder.Text))
+            {
+                result = false;
+                txtDisplay.Text += "destination folder is not valid." + Environment.NewLine;
+                txtDestinationFolder.Focus();
+            }
+
+            return result;
+        }
+
         private void ListDesiredFiles()
         {
             int filesChecked = 0;
@@ -265,6 +292,14 @@ namespace CodeBackupUtility
                     if (chkIgnoreObj.Checked && filename.Contains(@"\obj\")) { skipThisFile = true; }
                     if (fileDate < _dateTimeCutOff) { skipThisFile = true; }
 
+                    if (chkIgnoreOther.Checked) 
+                    {   
+                        string[] ignore = getIgnoreCSValues();
+                        foreach (string item in ignore)
+                        {
+                            if (filename.ToUpper().Contains(item.ToUpper())) { skipThisFile = true; }
+                        }
+                    }
                     if (skipThisFile == false)
                     {
                         filesSelected += 1;
@@ -309,6 +344,18 @@ namespace CodeBackupUtility
                 }
             }
             MessageBox.Show("Backup complete");
+        }
+
+        private string[] getIgnoreCSValues()
+        {
+            if (txtFsIgnore.Text.Length == 0)
+            {
+                return new string[0];
+            }
+
+            string[] delimiters = { ","};
+            string[] results = txtFsIgnore.Text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+            return results;
         }
         #endregion PrimaryMethods
 
