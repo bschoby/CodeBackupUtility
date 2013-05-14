@@ -56,19 +56,29 @@
             this.btnClearResults = new System.Windows.Forms.Button();
             this.chkIgnoreOther = new System.Windows.Forms.CheckBox();
             this.txtFsIgnore = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.loadWithoutDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSourceFolder
             // 
-            this.txtSourceFolder.Location = new System.Drawing.Point(114, 12);
+            this.txtSourceFolder.Location = new System.Drawing.Point(114, 36);
             this.txtSourceFolder.Name = "txtSourceFolder";
             this.txtSourceFolder.Size = new System.Drawing.Size(420, 20);
             this.txtSourceFolder.TabIndex = 0;
+            this.txtSourceFolder.TextChanged += new System.EventHandler(this.txtSourceFolder_TextChanged);
             // 
             // lblSourceFolder
             // 
             this.lblSourceFolder.AutoSize = true;
-            this.lblSourceFolder.Location = new System.Drawing.Point(16, 12);
+            this.lblSourceFolder.Location = new System.Drawing.Point(16, 36);
             this.lblSourceFolder.Name = "lblSourceFolder";
             this.lblSourceFolder.Size = new System.Drawing.Size(73, 13);
             this.lblSourceFolder.TabIndex = 1;
@@ -77,7 +87,7 @@
             // lblDestinationFolder
             // 
             this.lblDestinationFolder.AutoSize = true;
-            this.lblDestinationFolder.Location = new System.Drawing.Point(16, 38);
+            this.lblDestinationFolder.Location = new System.Drawing.Point(16, 62);
             this.lblDestinationFolder.Name = "lblDestinationFolder";
             this.lblDestinationFolder.Size = new System.Drawing.Size(92, 13);
             this.lblDestinationFolder.TabIndex = 3;
@@ -85,15 +95,16 @@
             // 
             // txtDestinationFolder
             // 
-            this.txtDestinationFolder.Location = new System.Drawing.Point(114, 38);
+            this.txtDestinationFolder.Location = new System.Drawing.Point(114, 62);
             this.txtDestinationFolder.Name = "txtDestinationFolder";
             this.txtDestinationFolder.Size = new System.Drawing.Size(420, 20);
             this.txtDestinationFolder.TabIndex = 3;
+            this.txtDestinationFolder.TextChanged += new System.EventHandler(this.txtDestinationFolder_TextChanged);
             // 
             // lblDateTime
             // 
             this.lblDateTime.AutoSize = true;
-            this.lblDateTime.Location = new System.Drawing.Point(16, 64);
+            this.lblDateTime.Location = new System.Drawing.Point(16, 88);
             this.lblDateTime.Name = "lblDateTime";
             this.lblDateTime.Size = new System.Drawing.Size(83, 13);
             this.lblDateTime.TabIndex = 5;
@@ -101,16 +112,16 @@
             // 
             // txtDisplay
             // 
-            this.txtDisplay.Location = new System.Drawing.Point(12, 138);
+            this.txtDisplay.Location = new System.Drawing.Point(12, 163);
             this.txtDisplay.Multiline = true;
             this.txtDisplay.Name = "txtDisplay";
             this.txtDisplay.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDisplay.Size = new System.Drawing.Size(578, 364);
+            this.txtDisplay.Size = new System.Drawing.Size(578, 339);
             this.txtDisplay.TabIndex = 25;
             // 
             // btnSetSourceFolder
             // 
-            this.btnSetSourceFolder.Location = new System.Drawing.Point(540, 11);
+            this.btnSetSourceFolder.Location = new System.Drawing.Point(540, 35);
             this.btnSetSourceFolder.Name = "btnSetSourceFolder";
             this.btnSetSourceFolder.Size = new System.Drawing.Size(25, 20);
             this.btnSetSourceFolder.TabIndex = 2;
@@ -120,7 +131,7 @@
             // 
             // btnSetDestinationFolder
             // 
-            this.btnSetDestinationFolder.Location = new System.Drawing.Point(540, 38);
+            this.btnSetDestinationFolder.Location = new System.Drawing.Point(540, 62);
             this.btnSetDestinationFolder.Name = "btnSetDestinationFolder";
             this.btnSetDestinationFolder.Size = new System.Drawing.Size(25, 20);
             this.btnSetDestinationFolder.TabIndex = 4;
@@ -130,7 +141,7 @@
             // 
             // btnScan
             // 
-            this.btnScan.Location = new System.Drawing.Point(595, 12);
+            this.btnScan.Location = new System.Drawing.Point(595, 36);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(96, 33);
             this.btnScan.TabIndex = 8;
@@ -141,7 +152,7 @@
             // lblFeedback
             // 
             this.lblFeedback.AutoSize = true;
-            this.lblFeedback.Location = new System.Drawing.Point(592, 67);
+            this.lblFeedback.Location = new System.Drawing.Point(592, 91);
             this.lblFeedback.Name = "lblFeedback";
             this.lblFeedback.Size = new System.Drawing.Size(65, 13);
             this.lblFeedback.TabIndex = 10;
@@ -150,7 +161,7 @@
             // lblFeedbackProcessed
             // 
             this.lblFeedbackProcessed.AutoSize = true;
-            this.lblFeedbackProcessed.Location = new System.Drawing.Point(592, 82);
+            this.lblFeedbackProcessed.Location = new System.Drawing.Point(592, 106);
             this.lblFeedbackProcessed.Name = "lblFeedbackProcessed";
             this.lblFeedbackProcessed.Size = new System.Drawing.Size(115, 13);
             this.lblFeedbackProcessed.TabIndex = 12;
@@ -159,7 +170,7 @@
             // lblFeedbackSelected
             // 
             this.lblFeedbackSelected.AutoSize = true;
-            this.lblFeedbackSelected.Location = new System.Drawing.Point(592, 97);
+            this.lblFeedbackSelected.Location = new System.Drawing.Point(592, 121);
             this.lblFeedbackSelected.Name = "lblFeedbackSelected";
             this.lblFeedbackSelected.Size = new System.Drawing.Size(107, 13);
             this.lblFeedbackSelected.TabIndex = 13;
@@ -167,7 +178,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(698, 48);
+            this.btnStop.Location = new System.Drawing.Point(698, 72);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(96, 33);
             this.btnStop.TabIndex = 14;
@@ -177,7 +188,7 @@
             // 
             // btnBackup
             // 
-            this.btnBackup.Location = new System.Drawing.Point(698, 12);
+            this.btnBackup.Location = new System.Drawing.Point(698, 36);
             this.btnBackup.Name = "btnBackup";
             this.btnBackup.Size = new System.Drawing.Size(96, 33);
             this.btnBackup.TabIndex = 9;
@@ -188,7 +199,7 @@
             // lblBackup
             // 
             this.lblBackup.AutoSize = true;
-            this.lblBackup.Location = new System.Drawing.Point(16, 90);
+            this.lblBackup.Location = new System.Drawing.Point(16, 114);
             this.lblBackup.Name = "lblBackup";
             this.lblBackup.Size = new System.Drawing.Size(73, 13);
             this.lblBackup.TabIndex = 17;
@@ -196,7 +207,7 @@
             // 
             // txtBackupLabel
             // 
-            this.txtBackupLabel.Location = new System.Drawing.Point(114, 90);
+            this.txtBackupLabel.Location = new System.Drawing.Point(114, 114);
             this.txtBackupLabel.Name = "txtBackupLabel";
             this.txtBackupLabel.Size = new System.Drawing.Size(167, 20);
             this.txtBackupLabel.TabIndex = 7;
@@ -207,7 +218,7 @@
             // lblBackupLabel
             // 
             this.lblBackupLabel.AutoSize = true;
-            this.lblBackupLabel.Location = new System.Drawing.Point(287, 93);
+            this.lblBackupLabel.Location = new System.Drawing.Point(287, 117);
             this.lblBackupLabel.Name = "lblBackupLabel";
             this.lblBackupLabel.Size = new System.Drawing.Size(80, 13);
             this.lblBackupLabel.TabIndex = 18;
@@ -216,7 +227,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 122);
+            this.label1.Location = new System.Drawing.Point(12, 146);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 26;
@@ -225,7 +236,7 @@
             // chkAutoBackup
             // 
             this.chkAutoBackup.AutoSize = true;
-            this.chkAutoBackup.Location = new System.Drawing.Point(595, 47);
+            this.chkAutoBackup.Location = new System.Drawing.Point(595, 71);
             this.chkAutoBackup.Name = "chkAutoBackup";
             this.chkAutoBackup.Size = new System.Drawing.Size(84, 17);
             this.chkAutoBackup.TabIndex = 10;
@@ -236,7 +247,7 @@
             // chkIgnoreGit
             // 
             this.chkIgnoreGit.AutoSize = true;
-            this.chkIgnoreGit.Location = new System.Drawing.Point(607, 140);
+            this.chkIgnoreGit.Location = new System.Drawing.Point(607, 164);
             this.chkIgnoreGit.Name = "chkIgnoreGit";
             this.chkIgnoreGit.Size = new System.Drawing.Size(99, 17);
             this.chkIgnoreGit.TabIndex = 11;
@@ -246,7 +257,7 @@
             // chkIgnoreBin
             // 
             this.chkIgnoreBin.AutoSize = true;
-            this.chkIgnoreBin.Location = new System.Drawing.Point(607, 163);
+            this.chkIgnoreBin.Location = new System.Drawing.Point(607, 187);
             this.chkIgnoreBin.Name = "chkIgnoreBin";
             this.chkIgnoreBin.Size = new System.Drawing.Size(102, 17);
             this.chkIgnoreBin.TabIndex = 12;
@@ -256,7 +267,7 @@
             // chkIgnoreObj
             // 
             this.chkIgnoreObj.AutoSize = true;
-            this.chkIgnoreObj.Location = new System.Drawing.Point(607, 186);
+            this.chkIgnoreObj.Location = new System.Drawing.Point(607, 210);
             this.chkIgnoreObj.Name = "chkIgnoreObj";
             this.chkIgnoreObj.Size = new System.Drawing.Size(102, 17);
             this.chkIgnoreObj.TabIndex = 13;
@@ -266,7 +277,7 @@
             // dtpQualTime
             // 
             this.dtpQualTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpQualTime.Location = new System.Drawing.Point(225, 64);
+            this.dtpQualTime.Location = new System.Drawing.Point(225, 88);
             this.dtpQualTime.Name = "dtpQualTime";
             this.dtpQualTime.ShowUpDown = true;
             this.dtpQualTime.Size = new System.Drawing.Size(95, 20);
@@ -276,7 +287,7 @@
             // dtpQualDate
             // 
             this.dtpQualDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpQualDate.Location = new System.Drawing.Point(114, 64);
+            this.dtpQualDate.Location = new System.Drawing.Point(114, 88);
             this.dtpQualDate.Name = "dtpQualDate";
             this.dtpQualDate.Size = new System.Drawing.Size(105, 20);
             this.dtpQualDate.TabIndex = 5;
@@ -285,7 +296,7 @@
             // 
             // btnClearResults
             // 
-            this.btnClearResults.Location = new System.Drawing.Point(479, 102);
+            this.btnClearResults.Location = new System.Drawing.Point(479, 126);
             this.btnClearResults.Name = "btnClearResults";
             this.btnClearResults.Size = new System.Drawing.Size(96, 33);
             this.btnClearResults.TabIndex = 27;
@@ -296,7 +307,7 @@
             // chkIgnoreOther
             // 
             this.chkIgnoreOther.AutoSize = true;
-            this.chkIgnoreOther.Location = new System.Drawing.Point(607, 209);
+            this.chkIgnoreOther.Location = new System.Drawing.Point(607, 233);
             this.chkIgnoreOther.Name = "chkIgnoreOther";
             this.chkIgnoreOther.Size = new System.Drawing.Size(98, 17);
             this.chkIgnoreOther.TabIndex = 28;
@@ -305,11 +316,65 @@
             // 
             // txtFsIgnore
             // 
-            this.txtFsIgnore.Location = new System.Drawing.Point(607, 232);
+            this.txtFsIgnore.Location = new System.Drawing.Point(607, 256);
             this.txtFsIgnore.Multiline = true;
             this.txtFsIgnore.Name = "txtFsIgnore";
             this.txtFsIgnore.Size = new System.Drawing.Size(200, 58);
             this.txtFsIgnore.TabIndex = 29;
+            this.txtFsIgnore.TextChanged += new System.EventHandler(this.txtFsIgnore_TextChanged);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(828, 24);
+            this.menuStrip1.TabIndex = 30;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadToolStripMenuItem,
+            this.loadWithoutDateToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.defaultToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.loadToolStripMenuItem.Text = "Load with date";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // defaultToolStripMenuItem
+            // 
+            this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
+            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.defaultToolStripMenuItem.Text = "Restore default";
+            this.defaultToolStripMenuItem.Click += new System.EventHandler(this.defaultToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // loadWithoutDateToolStripMenuItem
+            // 
+            this.loadWithoutDateToolStripMenuItem.Name = "loadWithoutDateToolStripMenuItem";
+            this.loadWithoutDateToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.loadWithoutDateToolStripMenuItem.Text = "Load without date";
+            this.loadWithoutDateToolStripMenuItem.Click += new System.EventHandler(this.loadWithoutDateToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -343,9 +408,13 @@
             this.Controls.Add(this.txtDestinationFolder);
             this.Controls.Add(this.lblSourceFolder);
             this.Controls.Add(this.txtSourceFolder);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Snapshot Backup Utility";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,6 +450,14 @@
         private System.Windows.Forms.Button btnClearResults;
         private System.Windows.Forms.CheckBox chkIgnoreOther;
         private System.Windows.Forms.TextBox txtFsIgnore;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem defaultToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadWithoutDateToolStripMenuItem;
     }
 }
 

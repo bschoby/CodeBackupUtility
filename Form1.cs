@@ -29,7 +29,8 @@ namespace CodeBackupUtility
             prepareToolTips();
 
             //TODO
-            //Add option to ignore with a textbox and comma separated list of chars, example [.exe, \debug\, ...]
+            //create a folder to hold setting files in (app.path or similar) and set as default
+            //maybe add an option to include ONLY results that include filesnames containing values from a csv list
 
             //for test only
             //_folderSource = @"C:\insight2\Insight2.Web\Controllers\";
@@ -46,6 +47,7 @@ namespace CodeBackupUtility
         #region Setup
         private void setDefaultValues()
         {
+            txtSourceFolder.Text = "";
             dtpQualDate.Value = DateTime.Now;
             dtpQualTime.Value = DateTime.Now.AddHours(-2);
             txtDestinationFolder.Text = defaultFolderDialogPath(_folderDestination);
@@ -58,6 +60,9 @@ namespace CodeBackupUtility
             chkIgnoreObj.Checked = true;
             chkIgnoreBin.Checked = true;
             chkIgnoreGit.Checked = true;
+            chkIgnoreOther.Checked = false;
+            txtFsIgnore.Text = "";
+            updateFormTitle("");
         }
 
         private void prepareToolTips()
@@ -95,7 +100,7 @@ namespace CodeBackupUtility
                 _folderSource = folderBrowserDialog1.SelectedPath;
             }
             
-            _folderSource = ensurePathEndsWithSlash(_folderSource);            
+            _folderSource = ensurePathEndsWithSlash(_folderSource);
             txtSourceFolder.Text = _folderSource;
         }
 
@@ -202,6 +207,30 @@ namespace CodeBackupUtility
                 btnScan.Text = "Scan";
             }
         }
+
+        private void txtSourceFolder_TextChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(txtSourceFolder.Text))
+            {
+                _folderSource = ensurePathEndsWithSlash(txtSourceFolder.Text);
+                //txtSourceFolder.Text = _folderSource;
+            }
+        }
+
+        private void txtDestinationFolder_TextChanged(object sender, EventArgs e)
+        {
+            if (Directory.Exists(txtDestinationFolder.Text))
+            {
+                _folderDestination = ensurePathEndsWithSlash(txtDestinationFolder.Text);
+                //txtDestinationFolder.Text = _folderDestination;
+            }   
+        }
+
+        private void txtFsIgnore_TextChanged(object sender, EventArgs e)
+        {
+            chkIgnoreOther.Checked = txtFsIgnore.Text != "" ? true : false;
+        }
+
         #endregion otherEvents
 
         #region simpleFunctions
@@ -238,6 +267,14 @@ namespace CodeBackupUtility
                 path = value;
             }
             return path;
+        }
+        private void updateFormTitle(string message)
+        {
+            this.Text = "Snapshot Backup Utility";
+            if (message != "")
+            {
+                this.Text += " - " + message;
+            }
         }
         #endregion simpleFunctions
 
@@ -358,6 +395,97 @@ namespace CodeBackupUtility
             return results;
         }
         #endregion PrimaryMethods
+
+        #region Menu
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Title = "Save settings";
+            saveFileDialog1.Filter = "XML|*.xml";
+            saveFileDialog1.InitialDirectory = @"C:\billtmp\";
+            saveFileDialog1.ShowDialog();
+            
+            if (saveFileDialog1.FileName != "")
+            {
+                Settings setting = new Settings();
+                setting.FolderDestination = _folderDestination;
+                setting.FolderSource = _folderSource;
+                setting.IgnoreBin = chkIgnoreBin.Checked;
+                setting.IgnoreGit = chkIgnoreGit.Checked;
+                setting.IgnoreObj = chkIgnoreObj.Checked;
+                setting.IgnoreListValues = txtFsIgnore.Text;
+                setting.Label = txtBackupLabel.Text;
+                setting.QualificationDateTime = _dateTimeCutOff;
+                setting.Save(saveFileDialog1.FileName);
+            }
+
+            updateFormTitle(saveFileDialog1.FileName);
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loadFromSettingFile(true);
+        }
+
+        private void loadWithoutDateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loadFromSettingFile(false);
+        }
+
+        private void loadFromSettingFile(bool loadDate)
+        {
+            openFileDialog1.ShowDialog();
+            openFileDialog1.Filter = "XML|*.xml";
+            openFileDialog1.InitialDirectory = @"C:\billtmp\";
+
+            if (openFileDialog1.FileName != "")
+            {
+                Settings setting = new Settings();
+                setting.Load(openFileDialog1.FileName);
+
+                txtSourceFolder.Text = setting.FolderSource;
+                _folderSource = setting.FolderSource;
+
+                txtDestinationFolder.Text = setting.FolderDestination;
+                _folderDestination = setting.FolderDestination;
+
+                if (loadDate)
+                {
+                    if (setting.QualificationDateTime > DateTime.Parse("1/1/1970"))
+                    {
+                        dtpQualDate.Value = setting.QualificationDateTime;
+                        dtpQualTime.Value = setting.QualificationDateTime;
+                        _dateTimeCutOff = setting.QualificationDateTime;
+                    }
+                }
+
+                txtBackupLabel.Text = setting.Label;
+                lblBackupLabel.Text = createBackupLabel(setting.Label);
+
+                chkIgnoreObj.Checked = setting.IgnoreObj;
+                chkIgnoreGit.Checked = setting.IgnoreGit;
+                chkIgnoreBin.Checked = setting.IgnoreBin;
+                txtFsIgnore.Text = setting.IgnoreListValues;
+
+                if (setting.IgnoreListValues != "")
+                {
+                    chkIgnoreOther.Checked = true;
+                }
+
+                updateFormTitle(openFileDialog1.FileName);
+            }
+        }
+
+        private void defaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setDefaultValues();
+        }
+        #endregion Menu
+
+        
+
+        
+
+
 
 
     }
